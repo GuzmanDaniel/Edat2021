@@ -259,7 +259,7 @@ public class ArbolBin {
 	// tenemos O(n) por recorrer cada elemento y O(n) del insertar general 
 	// para cada elemento, dando O(n * n) = O(n^2)
     
-    public Lista listarPreOrden() {
+    public Lista listarPreorden() {
         //Método público para listar los elementos del árbol en preorden
         Lista listaPreOrden = new Lista();
         //Llama al método privado preordenAux para trabajarlo
@@ -281,7 +281,7 @@ public class ArbolBin {
         return lista;
     }
 
-    public Lista listarInOrden() {
+    public Lista listarInorden() {
         //Método público para listar los elementos del árbol en inorden
         Lista listaInOrden = new Lista();
         //Llama al método privado inordenAux para trabajarlo
@@ -304,7 +304,7 @@ public class ArbolBin {
         return lista;
     }
 
-    public Lista listarPosOrden() {
+    public Lista listarPosorden() {
         //Método publico para listar los elementos del árbol en posorden
         Lista listaPosOrden = new Lista();
         //Llama al método privado posordenAux para trabajarlo
@@ -327,7 +327,7 @@ public class ArbolBin {
         return lista;
     }
 
-    public Lista listarPorNivel() {
+    public Lista listarPorNiveles() {
 		// retorna una lista con los elemetos ordenados en recorrido por nivel
 		
 		Cola cola = new Cola();
