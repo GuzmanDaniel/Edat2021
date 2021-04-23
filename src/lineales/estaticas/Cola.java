@@ -30,7 +30,7 @@ public class Cola {
         boolean exito = false;
         
         if ((this.fin + 1) % this.TAM != this.frente) {
-            //Si la cola no est√° llena entonces pone el nuevo elemento en la ubicacion de fin.
+            //Si la cola no est· llena entonces pone el nuevo elemento en la ubicacion de fin.
             //Y se corre de lugar el puntero fin.
             this.arreglo[this.fin] = nuevoElem;
             this.fin = (this.fin + 1) % this.TAM;
@@ -43,7 +43,7 @@ public class Cola {
         boolean exito = true;
         
         if (this.esVacia()) {
-            //La cola est√° vac√≠a, reporta error.
+            //La cola est· vacÌa, reporta error.
             exito = false;
         } else {
             //Al menos hay 1 elemento: avanza frente (de manera circular).
@@ -57,10 +57,10 @@ public class Cola {
     public Object obtenerFrente() {
         Object elem;
         if (this.esVacia()) {
-            //Si la cola est√° vac√≠a entonces el frente es nulo.
+            //Si la cola est· vacÌa entonces el frente es nulo.
             elem = null;
         } else {
-            //Si no, accedo al elemento que est√° en el frente de la cola.
+            //Si no, accedo al elemento que est· en el frente de la cola.
             elem = this.arreglo[this.frente];
         }
         return elem;
@@ -70,7 +70,7 @@ public class Cola {
         boolean exito = false;
         
         if (this.frente == this.fin) {
-            //Si frente y fin es igual entonces la cola est√° vac√≠a.
+            //Si frente y fin es igual entonces la cola est· vacÌa.
             exito = true;
         }
         return exito;
@@ -103,8 +103,8 @@ public class Cola {
         int aux = this.frente;
         
         if (this.fin == this.frente) {
-            //Si la cola est√° vac√≠a, imprime "Cola Vac√≠a".
-            s = "Cola Vac√≠a";
+            //Si la cola est· vacÌa, imprime "Cola VacÌa".
+            s = "Cola VacÌa";
         } else {
             //Si no, imprime "[".
             s = "[";
@@ -115,14 +115,30 @@ public class Cola {
                 s += this.arreglo[aux];
                 aux = (aux + 1) % this.TAM;
                 if (aux != this.fin) {
-                    //Mientras sea distinto el frente y fin, tambi√©n imprime una "," para separar elementos.
+                    //Mientras sea distinto el frente y fin, tambiÈn imprime una "," para separar elementos.
                     s += ",";
                 }
             }
-            //Por √∫ltimo imprime "]" para cerrar la cadena "s".
+            //Por ˙ltimo imprime "]" para cerrar la cadena "s".
             s += "]";
         }
         
         return s;
     }
+    
+	public String toStringTransparente() {
+		// muestra la estructura interna de la cola
+		// en cola est·tica, muestra el arreglo
+		String rep = "[ ";
+		for(int i = 0; i < arreglo.length; i++) {
+			if(arreglo[i] != null) {
+				rep += arreglo[i].toString() + "  ";
+			}
+			else {
+				rep += "_  ";
+			}
+		}
+		rep += "] frente: " + frente + " fin: " + fin;
+		return rep;
+	}
 }
