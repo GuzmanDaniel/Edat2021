@@ -386,31 +386,34 @@ public class ArbolBin {
         return encontrado;
     }
 
-    public Lista frontera() {
-        Lista nuevaLista = new Lista();
-        
-        fronteraAux(this.raiz, nuevaLista);
-        
-        nuevaLista.invertir();
-        
-        return nuevaLista;
-    }
-
-    private void fronteraAux(NodoArbol n, Lista lista) {
-
-        if (n != null) {
-            if ((n.getIzquierdo() == null) && (n.getDerecho() == null)) {
-                lista.insertar(n.getElem(), 1);
-            } else {
-                if (n.getIzquierdo() != null) {
-                    fronteraAux(n.getIzquierdo(), lista);
-                    if(n.getDerecho() != null){
-                        fronteraAux(n.getDerecho(), lista);
-                    }
-                }else{
-                    fronteraAux(n.getDerecho(), lista);
-                }
-            }
-        }
-    }
+	public Lista frontera() {
+		// retorna una lista con los nodos hoja del arbol
+		
+		Lista lista = new Lista();
+		
+		listarHojas(raiz, lista);
+		lista.invertirInPlace();
+		
+		return lista;
+	}
+	
+	private void listarHojas(NodoArbol nodo, Lista lista) {
+		// agrega los nodos hoja del arbol en nodo a la lista
+		
+		// caso base 1: nodo es null
+		
+		if(nodo != null) {
+			NodoArbol izquierdo = nodo.getIzquierdo();
+			NodoArbol derecho = nodo.getDerecho();
+			
+			// caso base 2: nodo hoja encontrado!!!
+			if(izquierdo == null && derecho == null) {
+				lista.insertar(nodo.getElem(), 1);
+			}
+			else {
+				listarHojas(izquierdo, lista);
+				listarHojas(derecho, lista);
+			}
+		}
+	}
 }
