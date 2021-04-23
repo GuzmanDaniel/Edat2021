@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package jerarquicas.dinamicas;
 
 import lineales.dinamicas.Lista;
@@ -10,8 +11,9 @@ import lineales.dinamicas.Cola;
 
 /**
  *
- * @author DanielPatricio
+ * @author Daniel Guzman FAI-1430 / Fabian Sepulveda FAI-2714
  */
+
 public class ArbolBin {
 
     //Atributo
@@ -85,42 +87,19 @@ public class ArbolBin {
     }
 
     public int altura() {
-        //MÃ©todo publico para hallar la altura del Ã¡rbol.
-        int alt = -1;
-        if (this.raiz != null) {
-            //Si la raÃ­z no es nula, entonces llama el mÃ©todo alturaAux
-            alt = alturaAux(0, this.raiz);
-        }
-        return alt;
+        return alturaAux(this.raiz);
     }
 
-    private int alturaAux(int i, NodoArbol n) {
-        //MÃ©todo privado para hallar la altura, precondiciÃ³n: hay un nodo (raiz)
-        int res, alt1 = 0, alt2 = 0;
-        if ((n.getDerecho() == null) && (n.getIzquierdo() == null)) {
-            //Si el nodo es una hoja, devuelve el valor de i que entra como parÃ¡metro
-            res = i;
-        } else {
-            //Si no es una hoja, entonces incrementa en 1 el valor i
-            i++;
-            if (n.getIzquierdo() != null) {
-                //Si tiene un HI entonces vuelve a llamar al mÃ©todo con el HI como parÃ¡metro
-                alt1 = alturaAux(i, n.getIzquierdo());
-            }
-            if (n.getDerecho() != null) {
-                //Si tiene un HD entonces vuelve a llamar al mÃ©todo con el HD como parÃ¡metro
-                alt2 = alturaAux(i, n.getDerecho());
-            }
-            if (alt1 >= alt2) {
-                //Si la rama Izquierda (alt1) es mayor que la rama Derecha (alt2) del Ã¡rbol
-                //Entonces a res se le pone el valor de alt1
-                res = alt1;
-            } else {
-                //En caso contrario, a res se le pone el valor de alt2
-                res = alt2;
-            }
+    private int alturaAux(NodoArbol n) {
+        //Retorna la altura del subarbol definido por nodo.
+        
+        //Caso base 1: nodo es null, salta el if.
+        int altura = -1;
+        if(n != null){
+            //Caso recursivo: sumar 1 a la mayor altura de los hijos.
+            altura = Math.max(alturaAux(n.getIzquierdo()), alturaAux(n.getDerecho())) + 1;
         }
-        return res;
+        return altura;
     }
 
     public int nivel(Object elemNuevo) {

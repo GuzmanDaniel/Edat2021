@@ -1,4 +1,15 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 package lineales.estaticas;
+
+/**
+ *
+ * @author Daniel Guzman FAI-1430 / Fabian Sepulveda FAI-2714
+ */
 
 public class Pila {
 
