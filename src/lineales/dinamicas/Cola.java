@@ -28,11 +28,11 @@ public class Cola {
         Nodo nuevo = new Nodo(nuevoElem, null);
         
         if (esVacia()) {
-            //Si la cola est· vacÌa entonces tanto el fin como el frente tendr·n el nodo nuevo con el elemento.
+            //Si la cola est√° vac√≠a entonces tanto el fin como el frente tendrÔøΩn el nodo nuevo con el elemento.
             this.fin = nuevo;
             this.frente = nuevo;
         } else {
-            //Si no, setea el ˙ltimo elemento al nuevo elemento y adem·s a fin estar· apuntado al nodo nuevo. 
+            //Si no, setea el √∫ltimo elemento al nuevo elemento y adem√°s a fin estar√° apuntado al nodo nuevo. 
             this.fin.setEnlace(nuevo);
             this.fin = nuevo;
         }
@@ -44,11 +44,11 @@ public class Cola {
         boolean exito = true;
 
         if (this.frente == null) {
-            //La cola esta vacÌa, reporta error..
+            //La cola esta vac√≠a, reporta error..
             exito = false;
         } else {
             //Al menos hay un elemento
-            //Quita el pimer elemento y actualiza frente (y fin si queda vacÌa)
+            //Quita el pimer elemento y actualiza frente (y fin si queda vac√≠a)
             this.frente = this.frente.getEnlace();
             
             if (this.frente == null) {
@@ -63,7 +63,7 @@ public class Cola {
         Object elem;
 
         if (this.esVacia()) {
-            //Si la cola est· vacÌa entonces el elemento es null. 
+            //Si la cola est√° vac√≠a entonces el elemento es null. 
             elem = null;
         } else {
             //Si no, accedo el elemento del frente de la cola.
@@ -92,16 +92,16 @@ public class Cola {
         Cola clon = new Cola();
         
         if (!esVacia()) {
-            //Si la cola no est· vacÌa entonces creo un nodo "aux1" que apunte al frente de la cola.
-            //Adem·s al frente de la cola clon se le crea un nuevo nodo con el elemento del aux1.
-            //TambiÈn a aux1 avanza al siguiente enlace y se crea un nuevo nodo "aux2" que apunte al frente de la cola clon.
+            //Si la cola no est√° vac√≠a entonces creo un nodo "aux1" que apunte al frente de la cola.
+            //Adem√°s al frente de la cola clon se le crea un nuevo nodo con el elemento del aux1.
+            //Tambi√©n a aux1 avanza al siguiente enlace y se crea un nuevo nodo "aux2" que apunte al frente de la cola clon.
             Nodo aux1 = this.frente;
             clon.frente = new Nodo(aux1.getElem(), null);
             aux1 = aux1.getEnlace();
             Nodo aux2 = clon.frente;
             
             while (aux1 != null) {
-                //Mientras aux1 no est· vacÌa entonces a aux2 le setea un nuevo nodo con el elemento de aux1.
+                //Mientras aux1 no est√° vac√≠a entonces a aux2 le setea un nuevo nodo con el elemento de aux1.
                 //Y tanto a aux2 y aux1 avanza al siguiente enlace.
                 aux2.setEnlace(new Nodo(aux1.getElem(), null));
                 aux2 = aux2.getEnlace();
@@ -119,8 +119,8 @@ public class Cola {
         String s = "";
 
         if (esVacia()) {
-            //Si la cola est· vacÌa, imprime "Cola VacÌa".
-            s = "Cola VacÌa";
+            //Si la cola est√° vac√≠a, imprime "Cola Vac√≠a".
+            s = "Cola Vac√≠a";
         } else {
             //Si no, se crea un nuevo nodo que apunte al frente de la cola e imprime "[".
             Nodo aux = this.frente;
@@ -144,7 +144,7 @@ public class Cola {
     }
     
     public String toStringTransparente() {
-    	// imprime la estructura interna de la cola, en Cola din·mica
+    	// imprime la estructura interna de la cola, en Cola din√°mica
     	// es indistinguible de toString()
     	return this.toString();
     }

@@ -25,16 +25,16 @@ public class ArbolBin {
     }
 
     public boolean insertar(Object elemNuevo, Object elemPadre, char lugar) {
-        //Inserta en el ·rbol elemNuevo con informacion de elemPadre y lugar,
+        //Inserta en el √°rbol elemNuevo con informacion de elemPadre y lugar,
         //Donde lugar puede ser "I" (Izquierda) o "D" (Derecha) para saber
-        //En que posiciÛn va el elemNuevo
+        //En que posici√≥n va el elemNuevo
         boolean exito = true;
 
         if (this.raiz == null) {
-            //Si el ·rbol est· vacÌo, entonces el nuevo elemento va a ser la raiz
+            //Si el √°rbol est√° vac√≠o, entonces el nuevo elemento va a ser la raiz
             this.raiz = new NodoArbol(elemNuevo, null, null);
         } else {
-            //Si no esta vacÌo, se busca el padre
+            //Si no esta vac√≠o, se busca el padre
             NodoArbol nodoPadre = obtenerNodo(this.raiz, elemPadre);
             if (nodoPadre != null) {
                 if ((lugar == 'I') && (nodoPadre.getIzquierdo() == null)) {
@@ -57,7 +57,7 @@ public class ArbolBin {
     }
 
     private NodoArbol obtenerNodo(NodoArbol n, Object buscado) {
-        //MÈtodo privado que busca un elemento y devuelve el nodo que lo contiene.
+        //M√©todo privado que busca un elemento y devuelve el nodo que lo contiene.
         //Si no se encuentra buscado, devuelve null
         NodoArbol resultado = null;
 
@@ -78,9 +78,9 @@ public class ArbolBin {
     }
 
     public boolean esVacio() {
-        //Devuelve true si el ·rbol esta vacÌo o false si no est· vacÌo
+        //Devuelve true si el √°rbol esta vac√≠o o false si no est√° vac√≠o
     	
-    	// si arbol vacÌo, raiz es null. Si no vacÌo, hay raÌz y no es null.
+    	// si arbol vac√≠o, raiz es null. Si no vac√≠o, hay ra√≠z y no es null.
         return raiz == null;
     }
 
@@ -101,24 +101,24 @@ public class ArbolBin {
     }
 
     public int nivel(Object elemNuevo) {
-        //MÈtodo p˙blico para hallar el nivel del elemNuevo ingresado por el usuario
-        //Llama el mÈtodo nivelAux para poder buscarlo
+        //M√©todo p√∫blico para hallar el nivel del elemNuevo ingresado por el usuario
+        //Llama el m√©todo nivelAux para poder buscarlo
         return nivelAux(this.raiz, elemNuevo);
     }
 
     private int nivelAux(NodoArbol n, Object elemento) {
-        //MÈtodo privado para hallar el nivel del ·rbol, con raiz como par·metro
+        //M√©todo privado para hallar el nivel del √°rbol, con raiz como par√°metro
         //Y elemento es lo que ingresa el usuario
         int nivel;
         if (n == null) {
             //Si el nodo ingresado es nulo entonces nivel es -1
             nivel = -1;
         } else if (n.getElem().equals(elemento)) {
-            //Si el elemento de n es igual al elemento pasado por par·metro entonces
+            //Si el elemento de n es igual al elemento pasado por par√°metro entonces
             //Nivel tiene valor 0
             nivel = 0;
         } else {
-            //Si todavÌa no encuentra el elemento entonces lo busca por la rama izquierda (HI)
+            //Si todav√≠a no encuentra el elemento entonces lo busca por la rama izquierda (HI)
             nivel = nivelAux(n.getIzquierdo(), elemento);
             if (nivel == -1) {
                 //Si el nivel es -1 entonces lo busca por la rama derecha (HD)
@@ -159,28 +159,28 @@ public class ArbolBin {
     }
 
     public void vaciar() {
-        // MÈtodo p˙blico para vaciar el ·rbol poniendo null a la raiz
+        // M√©todo p√∫blico para vaciar el √°rbol poniendo null a la raiz
         this.raiz = null;
-        // El garbage collector se lleva la raÌz dejando a sus hijos
+        // El garbage collector se lleva la ra√≠z dejando a sus hijos
         // sin referencia. Luego estos hijos son reclamados dejando 
-        // a sus hijos sin referencia. AsÌ recursivamente todos los
-        // nodos del ·rbol son reclamados.
+        // a sus hijos sin referencia. As√≠ recursivamente todos los
+        // nodos del √°rbol son reclamados.
     }
 
     public ArbolBin clone() {
-        //MÈtodo p˙blico para clonar el ·rbol
+        //M√©todo p√∫blico para clonar el √°rbol
         ArbolBin nuevo = new ArbolBin();
-        //Llama al mÈtodo clonarAux para clonar el ·rbol nuevo
+        //Llama al m√©todo clonarAux para clonar el √°rbol nuevo
         nuevo.raiz = clonarAux(this.raiz);
         return nuevo;
     }
 
     private NodoArbol clonarAux(NodoArbol aux) {
-        //MÈtodo privado para clonar el ·rbol
+        //M√©todo privado para clonar el √°rbol
         NodoArbol hijo = null;
         if (aux != null) {
             //El nodo hijo es creado con el elemento de aux, y enlazado con el HI y HD correspondiente
-            //Haciendo uso del mismo mÈtodo
+            //Haciendo uso del mismo m√©todo
             hijo = new NodoArbol(aux.getElem(), clonarAux(aux.getIzquierdo()), clonarAux(aux.getDerecho()));
         }
         return hijo;
@@ -188,18 +188,18 @@ public class ArbolBin {
 
     @Override
     public String toString() {
-        //MÈtodo publico para mostrar el contenido del ·rbol
-        String cadena = "·rbol vacÌo";
-        //Llama al mÈtodo privado toStringAux para trabajarlo m·s a fondo
+        //M√©todo publico para mostrar el contenido del √°rbol
+        String cadena = "√Årbol vac√≠o";
+        //Llama al m√©todo privado toStringAux para trabajarlo m√°s a fondo
         cadena = toStringAux(this.raiz);
-        // aÒadir una representaciÛn gr·fica del ·rbol
+        // a√±adir una representaci√≥n gr√°fica del √°rbol
         cadena += toStringSubArbol(raiz, "", 'r');
         return cadena;
     }
     
 	private String toStringSubArbol(NodoArbol nodo, String prefijo, char lugar) {
 		// imprime el arbol en recorrido pre-orden, agregando espacios
-		// seg˙n la profundidad
+		// seg√∫n la profundidad
 		String rep = "";
 		
 		if(nodo != null) {
@@ -247,22 +247,22 @@ public class ArbolBin {
         return cadena1;
     }
 
-	// en los mÈtodos de recorridos se usa insertar(elem, 1) en listas
-	// porque es de O(1) dada la implementaciÛn de lista con cabecera y
-    // por lo tanto m·s eficiente que insertar() general que es de O(n).
+	// en los m√©todos de recorridos se usa insertar(elem, 1) en listas
+	// porque es de O(1) dada la implementaci√≥n de lista con cabecera y
+    // por lo tanto m√°s eficiente que insertar() general que es de O(n).
 	// esta forma de insertar tiene el inconveniente de que el orden de la lista
 	// es invertido, por lo que antes de retornar la lista debe ser invertida.
 	// En total cada elemento es visitado 2 veces, la primera al recorrer el 
-	// ·rbol y la segunda al invertir la lista, siendo los mÈtodos de O(2n) = O(n)
+	// √°rbol y la segunda al invertir la lista, siendo los m√©todos de O(2n) = O(n)
 	
 	// Si en cambio se inserta por el final, por la regla del producto, 
 	// tenemos O(n) por recorrer cada elemento y O(n) del insertar general 
 	// para cada elemento, dando O(n * n) = O(n^2)
     
     public Lista listarPreorden() {
-        //MÈtodo p˙blico para listar los elementos del ·rbol en preorden
+        //M√©todo p√∫blico para listar los elementos del √°rbol en preorden
         Lista listaPreOrden = new Lista();
-        //Llama al mÈtodo privado preordenAux para trabajarlo
+        //Llama al m√©todo privado preordenAux para trabajarlo
         preordenAux(this.raiz, listaPreOrden);
         //Invierto la lista.
         listaPreOrden.invertir();
@@ -272,7 +272,7 @@ public class ArbolBin {
 
     private Lista preordenAux(NodoArbol nodo, Lista lista) {
         if (nodo != null) {
-            //Ingresa el elemento a la lista pasada por par·metro (el padre).
+            //Ingresa el elemento a la lista pasada por par√°metro (el padre).
             lista.insertar(nodo.getElem(), 1);
             //Recorre sus hijos en preorden.
             preordenAux(nodo.getIzquierdo(), lista);
@@ -282,9 +282,9 @@ public class ArbolBin {
     }
 
     public Lista listarInorden() {
-        //MÈtodo p˙blico para listar los elementos del ·rbol en inorden
+        //M√©todo p√∫blico para listar los elementos del √°rbol en inorden
         Lista listaInOrden = new Lista();
-        //Llama al mÈtodo privado inordenAux para trabajarlo
+        //Llama al m√©todo privado inordenAux para trabajarlo
         inordenAux(this.raiz, listaInOrden);
         //Invierto la lista.
         listaInOrden.invertir();
@@ -296,18 +296,18 @@ public class ArbolBin {
         if (nodo != null) {
             //Recorre primero el HI
             inordenAux(nodo.getIzquierdo(), lista);
-            //Ingresa el elemento a la lista pasada por par·metro (padre)
+            //Ingresa el elemento a la lista pasada por par√°metro (padre)
             lista.insertar(nodo.getElem(), 1);
-            //Recorre por ˙ltimo el HD
+            //Recorre por √∫ltimo el HD
             inordenAux(nodo.getDerecho(), lista);
         }
         return lista;
     }
 
     public Lista listarPosorden() {
-        //MÈtodo publico para listar los elementos del ·rbol en posorden
+        //M√©todo publico para listar los elementos del √°rbol en posorden
         Lista listaPosOrden = new Lista();
-        //Llama al mÈtodo privado posordenAux para trabajarlo
+        //Llama al m√©todo privado posordenAux para trabajarlo
         posordenAux(this.raiz, listaPosOrden);
         //Invierto la lista
         listaPosOrden.invertir();
@@ -319,9 +319,9 @@ public class ArbolBin {
         if (nodo != null) {
             //Recorre primero el HI
             posordenAux(nodo.getIzquierdo(), lista);
-            //DespuÈs el HD
+            //Despu√©s el HD
             posordenAux(nodo.getDerecho(), lista);
-            //Ingresa el elemento a la lista pasada por par·metro (padre)
+            //Ingresa el elemento a la lista pasada por par√°metro (padre)
             lista.insertar(nodo.getElem(), 1);
         }
         return lista;
@@ -333,7 +333,7 @@ public class ArbolBin {
 		Cola cola = new Cola();
 		Lista lista = new Lista();
 		
-		// si raiz == null no hay elementos y retorna lista vacÌa
+		// si raiz == null no hay elementos y retorna lista vac√≠a
 		if(raiz != null) {
 			cola.poner(raiz);
 			

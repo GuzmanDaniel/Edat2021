@@ -47,7 +47,7 @@ public class Lista {
     public boolean eliminar(int pos) {
         boolean exito = true;
 
-        // verificar posiciÛn v·lida
+        // verificar posici√≥n v√°lida
         if ((pos < 1) || (pos > this.longitud())) {
             exito = false;
         } else {
@@ -68,7 +68,7 @@ public class Lista {
     public Object recuperar(int pos) {
         Object elem;
         
-        // verificar posiciÛn v·lida
+        // verificar posici√≥n v√°lida
         if ((pos < 1) || (pos > this.longitud())) {
             elem = null;
         } else {
@@ -80,8 +80,8 @@ public class Lista {
     }
 
 	private Nodo encontrarNodo(int posicion) {
-		// retorna el nodo en la posiciÛn dada
-		// precondiciÛn: el nodo se encuentra en la lista
+		// retorna el nodo en la posici√≥n dada
+		// precondici√≥n: el nodo se encuentra en la lista
 		Nodo aux = cabecera;
 		for(int i = 1; i < posicion; i++) {
 			aux = aux.getEnlace();
@@ -102,7 +102,7 @@ public class Lista {
 			aux = aux.getEnlace();
 		}
 		// !encontrado significa salir del while porque
-		// se recorriÛ toda la lista sin encontrar elem
+		// se recorri√≥ toda la lista sin encontrar elem
 		if(!encontrado) pos = -1;
 
 		return pos;
@@ -154,7 +154,7 @@ public class Lista {
         String s;
 
         if (this.cabecera == null) {
-            s = "Lista vacÌa";
+            s = "Lista vac√≠a";
         } else {
             Nodo aux = this.cabecera;
             s = "[";
