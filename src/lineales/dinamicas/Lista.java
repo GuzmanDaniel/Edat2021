@@ -228,7 +228,7 @@ public class Lista {
 		// retorna la inversa de esta lista
 		Nodo aux = cabecera;
 		Lista invertida = new Lista();
-		invertida.tamanio = this.tamanio;
+		invertida.longitud = this.longitud;
 		while(aux != null) {
 			// agregar el siguiente elemento
 			invertida.cabecera = new Nodo(aux.getElem(), invertida.cabecera);
