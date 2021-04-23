@@ -25,16 +25,16 @@ public class ArbolBin {
     }
 
     public boolean insertar(Object elemNuevo, Object elemPadre, char lugar) {
-        //Inserta en el Ãƒï¿½rbol elemNuevo con informacion de elemPadre y lugar,
+        //Inserta en el árbol elemNuevo con informacion de elemPadre y lugar,
         //Donde lugar puede ser "I" (Izquierda) o "D" (Derecha) para saber
-        //En que posiciÃƒÂ³n va el elemNuevo
+        //En que posición va el elemNuevo
         boolean exito = true;
 
         if (this.raiz == null) {
-            //Si el ÃƒÂ¡rbol esta vacÃƒÂ­o, entonces el nuevo elemento va a ser la raiz
+            //Si el árbol está vacío, entonces el nuevo elemento va a ser la raiz
             this.raiz = new NodoArbol(elemNuevo, null, null);
         } else {
-            //Si no esta vacÃƒÂ­o, se busca el padre
+            //Si no esta vacío, se busca el padre
             NodoArbol nodoPadre = obtenerNodo(this.raiz, elemPadre);
             if (nodoPadre != null) {
                 if ((lugar == 'I') && (nodoPadre.getIzquierdo() == null)) {
@@ -57,7 +57,7 @@ public class ArbolBin {
     }
 
     private NodoArbol obtenerNodo(NodoArbol n, Object buscado) {
-        //MÃƒÂ©todo privado que busca un elemento y devuelve el nodo que lo contiene.
+        //Método privado que busca un elemento y devuelve el nodo que lo contiene.
         //Si no se encuentra buscado, devuelve null
         NodoArbol resultado = null;
 
@@ -78,12 +78,10 @@ public class ArbolBin {
     }
 
     public boolean esVacio() {
-        //Devuelve true si el Ãƒï¿½rbol esta vacÃƒÂ­o o false si no estÃƒÂ¡ vacÃƒÂ­o
-        boolean res = false;
-        if (this.raiz == null) {
-            res = true;
-        }
-        return res;
+        //Devuelve true si el árbol esta vacío o false si no está vacío
+    	
+    	// si arbol vacío, raiz es null. Si no vacío, hay raíz y no es null.
+        return raiz == null;
     }
 
     public int altura() {
@@ -103,24 +101,24 @@ public class ArbolBin {
     }
 
     public int nivel(Object elemNuevo) {
-        //MÃƒÂ©todo pÃƒÂºblico para hallar el nivel del elemNuevo ingresado por el usuario
-        //Llama el mÃƒÂ©todo nivelAux para poder buscarlo
+        //Método público para hallar el nivel del elemNuevo ingresado por el usuario
+        //Llama el método nivelAux para poder buscarlo
         return nivelAux(this.raiz, elemNuevo);
     }
 
     private int nivelAux(NodoArbol n, Object elemento) {
-        //MÃƒÂ©todo privado para hallar el nivel del Ãƒï¿½rbol, con raiz como parÃƒÂ¡metro
+        //Método privado para hallar el nivel del árbol, con raiz como parámetro
         //Y elemento es lo que ingresa el usuario
         int nivel;
         if (n == null) {
             //Si el nodo ingresado es nulo entonces nivel es -1
             nivel = -1;
         } else if (n.getElem().equals(elemento)) {
-            //Si el elemento de n es igual al elemento pasado por parÃƒÂ¡metro entonces
+            //Si el elemento de n es igual al elemento pasado por parámetro entonces
             //Nivel tiene valor 0
             nivel = 0;
         } else {
-            //Si todavÃƒÂ­a no encuentra el elemento entonces lo busca por la rama izquierda (HI)
+            //Si todavía no encuentra el elemento entonces lo busca por la rama izquierda (HI)
             nivel = nivelAux(n.getIzquierdo(), elemento);
             if (nivel == -1) {
                 //Si el nivel es -1 entonces lo busca por la rama derecha (HD)
@@ -142,6 +140,7 @@ public class ArbolBin {
     private Object padreRecursivo(Object elemento, NodoArbol n) {
         Object padre = null;
         if (n != null) {
+        	// si n es padre de elemento, ya sea hijo izquierdo o derecho
             if ((n.getIzquierdo() != null && n.getIzquierdo().getElem().equals(elemento))
                     || (n.getDerecho() != null && n.getDerecho().getElem().equals(elemento))) {
                 padre = n.getElem();
@@ -162,22 +161,26 @@ public class ArbolBin {
     public void vaciar() {
         // Método público para vaciar el árbol poniendo null a la raiz
         this.raiz = null;
+        // El garbage collector se lleva la raíz dejando a sus hijos
+        // sin referencia. Luego estos hijos son reclamados dejando 
+        // a sus hijos sin referencia. Así recursivamente todos los
+        // nodos del árbol son reclamados.
     }
 
     public ArbolBin clone() {
-        //MÃƒÂ©todo pÃƒÂºblico para clonar el ÃƒÂ¡rbol
+        //Método público para clonar el árbol
         ArbolBin nuevo = new ArbolBin();
-        //Llama al mÃƒÂ©todo clonarAux para clonar el ÃƒÂ¡rbol nuevo
+        //Llama al método clonarAux para clonar el árbol nuevo
         nuevo.raiz = clonarAux(this.raiz);
         return nuevo;
     }
 
     private NodoArbol clonarAux(NodoArbol aux) {
-        //MÃƒÂ©todo privado para clonar el ÃƒÂ¡rbol
+        //Método privado para clonar el árbol
         NodoArbol hijo = null;
         if (aux != null) {
             //El nodo hijo es creado con el elemento de aux, y enlazado con el HI y HD correspondiente
-            //Haciendo uso del mismo mÃƒÂ©todo
+            //Haciendo uso del mismo método
             hijo = new NodoArbol(aux.getElem(), clonarAux(aux.getIzquierdo()), clonarAux(aux.getDerecho()));
         }
         return hijo;
@@ -185,32 +188,33 @@ public class ArbolBin {
 
     @Override
     public String toString() {
-        //MÃƒÂ©todo publico para mostrar el contenido del ÃƒÂ¡rbol
-        String cadena = "Ãƒï¿½rbol vacÃƒÂ­o";
-        //Llama al mÃƒÂ©todo privado toStringAux para trabajarlo mÃƒÂ¡s a fondo
+        //Método publico para mostrar el contenido del árbol
+        String cadena = "árbol vacío";
+        //Llama al método privado toStringAux para trabajarlo más a fondo
         cadena = toStringAux(this.raiz);
+        // añadir una representación gráfica del árbol
         cadena += toStringSubArbol(raiz, "", 'r');
         return cadena;
     }
     
-	private String toStringSubArbol(NodoArbol nodo, String prefijo, char lado) {
+	private String toStringSubArbol(NodoArbol nodo, String prefijo, char lugar) {
 		// imprime el arbol en recorrido pre-orden, agregando espacios
-		// segÃºn la profundidad
+		// según la profundidad
 		String rep = "";
 		
 		if(nodo != null) {
 			rep = prefijo;
 			
-			if(lado == 'd') {
+			if(lugar == 'D') {
 				rep += "|";
 				prefijo += " ";
 			}
 			// agregar el elemento del nodo actual
-			rep += "------" + lado + " " + nodo.getElem().toString() + "\n";
+			rep += "------" + lugar + " " + nodo.getElem().toString() + "\n";
 		
 			// agregar el resto del Ã¡rbol
-			rep += toStringSubArbol(nodo.getIzquierdo(), prefijo + "      |", 'i');
-			rep += toStringSubArbol(nodo.getDerecho(), prefijo + "      ", 'd');
+			rep += toStringSubArbol(nodo.getIzquierdo(), prefijo + "      |", 'I');
+			rep += toStringSubArbol(nodo.getDerecho(), prefijo + "      ", 'D');
 		}
 		return rep;
 	}
@@ -243,15 +247,16 @@ public class ArbolBin {
         return cadena1;
     }
 
-	// en los cuatro métodos de recorridos se usa insertar(elem, 1) en listas
-	// porque es más eficiente dada la implementación de lista con cabecera.
+	// en los métodos de recorridos se usa insertar(elem, 1) en listas
+	// porque es de O(1) dada la implementación de lista con cabecera y
+    // por lo tanto más eficiente que insertar() general que es de O(n).
 	// esta forma de insertar tiene el inconveniente de que el orden de la lista
 	// es invertido, por lo que antes de retornar la lista debe ser invertida.
 	// En total cada elemento es visitado 2 veces, la primera al recorrer el 
 	// árbol y la segunda al invertir la lista, siendo los métodos de O(2n) = O(n)
 	
 	// Si en cambio se inserta por el final, por la regla del producto, 
-	// tenemos O(n) por recorrer cada elemento y O(n) de insertar general 
+	// tenemos O(n) por recorrer cada elemento y O(n) del insertar general 
 	// para cada elemento, dando O(n * n) = O(n^2)
     
     public Lista listarPreOrden() {
