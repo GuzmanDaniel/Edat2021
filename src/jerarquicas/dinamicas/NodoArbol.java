@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package jerarquicas.dinamicas;
 
 /**
  *
- * @author DanielPatricio
+ * @author Daniel Guzman FAI-1430 / Fabian Sepulveda FAI-2714
  */
+
 class NodoArbol {
     //Atributos:
     private Object elem;
