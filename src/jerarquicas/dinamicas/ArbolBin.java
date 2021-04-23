@@ -160,7 +160,7 @@ public class ArbolBin {
     }
 
     public void vaciar() {
-        //MÃƒÂ©todo pÃƒÂºblico para vaciar el ÃƒÂ¡rbol poniendo null a la raiz
+        // Método público para vaciar el árbol poniendo null a la raiz
         this.raiz = null;
     }
 
@@ -243,10 +243,21 @@ public class ArbolBin {
         return cadena1;
     }
 
+	// en los cuatro métodos de recorridos se usa insertar(elem, 1) en listas
+	// porque es más eficiente dada la implementación de lista con cabecera.
+	// esta forma de insertar tiene el inconveniente de que el orden de la lista
+	// es invertido, por lo que antes de retornar la lista debe ser invertida.
+	// En total cada elemento es visitado 2 veces, la primera al recorrer el 
+	// árbol y la segunda al invertir la lista, siendo los métodos de O(2n) = O(n)
+	
+	// Si en cambio se inserta por el final, por la regla del producto, 
+	// tenemos O(n) por recorrer cada elemento y O(n) de insertar general 
+	// para cada elemento, dando O(n * n) = O(n^2)
+    
     public Lista listarPreOrden() {
-        //MÃƒÂ©todo publico para listar los elementos del ÃƒÂ¡rbol en preorden
+        //Método público para listar los elementos del árbol en preorden
         Lista listaPreOrden = new Lista();
-        //Llama al mÃƒÂ©todo privado preordenAux para trabajarlo
+        //Llama al método privado preordenAux para trabajarlo
         preordenAux(this.raiz, listaPreOrden);
         //Invierto la lista.
         listaPreOrden.invertir();
@@ -256,7 +267,7 @@ public class ArbolBin {
 
     private Lista preordenAux(NodoArbol nodo, Lista lista) {
         if (nodo != null) {
-            //Ingresa el elemento a la lista pasada por parÃƒÂ¡metro.
+            //Ingresa el elemento a la lista pasada por parámetro (el padre).
             lista.insertar(nodo.getElem(), 1);
             //Recorre sus hijos en preorden.
             preordenAux(nodo.getIzquierdo(), lista);
@@ -266,9 +277,9 @@ public class ArbolBin {
     }
 
     public Lista listarInOrden() {
-        //MÃƒÂ©todo publico para listar los elementos del ÃƒÂ¡rbol en inorden
+        //Método público para listar los elementos del árbol en inorden
         Lista listaInOrden = new Lista();
-        //Llama al mÃƒÂ©todo privado inordenAux para trabajarlo
+        //Llama al método privado inordenAux para trabajarlo
         inordenAux(this.raiz, listaInOrden);
         //Invierto la lista.
         listaInOrden.invertir();
@@ -280,18 +291,18 @@ public class ArbolBin {
         if (nodo != null) {
             //Recorre primero el HI
             inordenAux(nodo.getIzquierdo(), lista);
-            //Ingresa el elemento a la lista pasada por parÃƒÂ¡metro
+            //Ingresa el elemento a la lista pasada por parámetro (padre)
             lista.insertar(nodo.getElem(), 1);
-            //Recorre por ÃƒÂºltimo el HD
+            //Recorre por último el HD
             inordenAux(nodo.getDerecho(), lista);
         }
         return lista;
     }
 
     public Lista listarPosOrden() {
-        //MÃƒÂ©todo publico para listar los elementos del ÃƒÂ¡rbol en posorden
+        //Método publico para listar los elementos del árbol en posorden
         Lista listaPosOrden = new Lista();
-        //Llama al mÃƒÂ©todo privado posordenAux para trabajarlo
+        //Llama al método privado posordenAux para trabajarlo
         posordenAux(this.raiz, listaPosOrden);
         //Invierto la lista
         listaPosOrden.invertir();
@@ -303,9 +314,9 @@ public class ArbolBin {
         if (nodo != null) {
             //Recorre primero el HI
             posordenAux(nodo.getIzquierdo(), lista);
-            //DespuÃƒÂºes el HD
+            //Después el HD
             posordenAux(nodo.getDerecho(), lista);
-            //Ingresa el elemento a la lista pasada por parÃƒÂ¡metro
+            //Ingresa el elemento a la lista pasada por parámetro (padre)
             lista.insertar(nodo.getElem(), 1);
         }
         return lista;
@@ -317,7 +328,7 @@ public class ArbolBin {
 		Cola cola = new Cola();
 		Lista lista = new Lista();
 		
-		// si raiz == null no hay elementos y retorna lista vacÃƒÂ­a
+		// si raiz == null no hay elementos y retorna lista vacía
 		if(raiz != null) {
 			cola.poner(raiz);
 			
@@ -339,7 +350,6 @@ public class ArbolBin {
 		lista.invertir();
 		return lista;
 	}
-
 
     public Lista obtenerAncestros(Object elemento) {
         Lista lista = new Lista();
