@@ -6,9 +6,6 @@
 
 package lineales.dinamicas;
 
-import lineales.dinamicas.Nodo;
-
-
 /**
  *
  * @author Daniel Guzman FAI-1430 / Fabian Sepulveda FAI-2714
@@ -144,5 +141,11 @@ public class Cola {
         }
         
         return s;
+    }
+    
+    public String toStringTransparente() {
+    	// imprime la estructura interna de la cola, en Cola dinámica
+    	// es indistinguible de toString()
+    	return this.toString();
     }
 }
