@@ -150,7 +150,7 @@ public class Lista {
         String s;
 
         if (this.cabecera == null) {
-            s = "Lista vacÃ­a";
+            s = "Lista vacía";
         } else {
             Nodo aux = this.cabecera;
             s = "[";
@@ -191,6 +191,32 @@ public class Lista {
         return nuevaLista;
     }
 
+	public void eliminarApariciones(Object elem) {
+		// elimina todas las apariciones de elem en la lista
+		
+		// agregar un nodo extra elimina casos especiales como
+		// eliminar varios elementos al inicio de la lista
+		cabecera = new Nodo(null, cabecera);
+		
+		Nodo aux = cabecera;
+		Nodo visitado;
+		while(aux != null && (visitado = aux.getEnlace()) != null) {
+			if(visitado.getElem().equals(elem)) {
+				// saltar el nodo para quitarlo de la lista
+				aux.setEnlace(visitado.getEnlace());
+				longitud--;
+			}
+			else {
+				aux = aux.getEnlace();
+			}
+		}
+		
+		// finalmente quitar el nodo extra
+		cabecera = cabecera.getEnlace();
+	}
+    
+	/*
+
     public void eliminarApariciones(Object x) {
         int lon = this.longitud(), i = 1;
         Nodo aux = this.cabecera;
@@ -215,6 +241,8 @@ public class Lista {
             i++;
         }
     }
+    
+   */
     
     public void invertir() {
         Nodo anterior = this.cabecera;
