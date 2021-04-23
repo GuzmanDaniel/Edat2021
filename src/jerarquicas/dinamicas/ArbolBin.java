@@ -23,16 +23,16 @@ public class ArbolBin {
     }
 
     public boolean insertar(Object elemNuevo, Object elemPadre, char lugar) {
-        //Inserta en el Árbol elemNuevo con informacion de elemPadre y lugar,
+        //Inserta en el Ã�rbol elemNuevo con informacion de elemPadre y lugar,
         //Donde lugar puede ser "I" (Izquierda) o "D" (Derecha) para saber
-        //En que posición va el elemNuevo
+        //En que posiciÃ³n va el elemNuevo
         boolean exito = true;
 
         if (this.raiz == null) {
-            //Si el árbol esta vacío, entonces el nuevo elemento va a ser la raiz
+            //Si el Ã¡rbol esta vacÃ­o, entonces el nuevo elemento va a ser la raiz
             this.raiz = new NodoArbol(elemNuevo, null, null);
         } else {
-            //Si no esta vacío, se busca el padre
+            //Si no esta vacÃ­o, se busca el padre
             NodoArbol nodoPadre = obtenerNodo(this.raiz, elemPadre);
             if (nodoPadre != null) {
                 if ((lugar == 'I') && (nodoPadre.getIzquierdo() == null)) {
@@ -55,7 +55,7 @@ public class ArbolBin {
     }
 
     private NodoArbol obtenerNodo(NodoArbol n, Object buscado) {
-        //Método privado que busca un elemento y devuelve el nodo que lo contiene.
+        //MÃ©todo privado que busca un elemento y devuelve el nodo que lo contiene.
         //Si no se encuentra buscado, devuelve null
         NodoArbol resultado = null;
 
@@ -76,7 +76,7 @@ public class ArbolBin {
     }
 
     public boolean esVacio() {
-        //Devuelve true si el Árbol esta vacío o false si no está vacío
+        //Devuelve true si el Ã�rbol esta vacÃ­o o false si no estÃ¡ vacÃ­o
         boolean res = false;
         if (this.raiz == null) {
             res = true;
@@ -85,34 +85,34 @@ public class ArbolBin {
     }
 
     public int altura() {
-        //Método publico para hallar la altura del árbol.
+        //MÃ©todo publico para hallar la altura del Ã¡rbol.
         int alt = -1;
         if (this.raiz != null) {
-            //Si la raíz no es nula, entonces llama el método alturaAux
+            //Si la raÃ­z no es nula, entonces llama el mÃ©todo alturaAux
             alt = alturaAux(0, this.raiz);
         }
         return alt;
     }
 
     private int alturaAux(int i, NodoArbol n) {
-        //Método privado para hallar la altura, precondición: hay un nodo (raiz)
+        //MÃ©todo privado para hallar la altura, precondiciÃ³n: hay un nodo (raiz)
         int res, alt1 = 0, alt2 = 0;
         if ((n.getDerecho() == null) && (n.getIzquierdo() == null)) {
-            //Si el nodo es una hoja, devuelve el valor de i que entra como parámetro
+            //Si el nodo es una hoja, devuelve el valor de i que entra como parÃ¡metro
             res = i;
         } else {
             //Si no es una hoja, entonces incrementa en 1 el valor i
             i++;
             if (n.getIzquierdo() != null) {
-                //Si tiene un HI entonces vuelve a llamar al método con el HI como parámetro
+                //Si tiene un HI entonces vuelve a llamar al mÃ©todo con el HI como parÃ¡metro
                 alt1 = alturaAux(i, n.getIzquierdo());
             }
             if (n.getDerecho() != null) {
-                //Si tiene un HD entonces vuelve a llamar al método con el HD como parámetro
+                //Si tiene un HD entonces vuelve a llamar al mÃ©todo con el HD como parÃ¡metro
                 alt2 = alturaAux(i, n.getDerecho());
             }
             if (alt1 >= alt2) {
-                //Si la rama Izquierda (alt1) es mayor que la rama Derecha (alt2) del árbol
+                //Si la rama Izquierda (alt1) es mayor que la rama Derecha (alt2) del Ã¡rbol
                 //Entonces a res se le pone el valor de alt1
                 res = alt1;
             } else {
@@ -124,24 +124,24 @@ public class ArbolBin {
     }
 
     public int nivel(Object elemNuevo) {
-        //Método público para hallar el nivel del elemNuevo ingresado por el usuario
-        //Llama el método nivelAux para poder buscarlo
+        //MÃ©todo pÃºblico para hallar el nivel del elemNuevo ingresado por el usuario
+        //Llama el mÃ©todo nivelAux para poder buscarlo
         return nivelAux(this.raiz, elemNuevo);
     }
 
     private int nivelAux(NodoArbol n, Object elemento) {
-        //Método privado para hallar el nivel del Árbol, con raiz como parámetro
+        //MÃ©todo privado para hallar el nivel del Ã�rbol, con raiz como parÃ¡metro
         //Y elemento es lo que ingresa el usuario
         int nivel;
         if (n == null) {
             //Si el nodo ingresado es nulo entonces nivel es -1
             nivel = -1;
         } else if (n.getElem().equals(elemento)) {
-            //Si el elemento de n es igual al elemento pasado por parámetro entonces
+            //Si el elemento de n es igual al elemento pasado por parÃ¡metro entonces
             //Nivel tiene valor 0
             nivel = 0;
         } else {
-            //Si todavía no encuentra el elemento entonces lo busca por la rama izquierda (HI)
+            //Si todavÃ­a no encuentra el elemento entonces lo busca por la rama izquierda (HI)
             nivel = nivelAux(n.getIzquierdo(), elemento);
             if (nivel == -1) {
                 //Si el nivel es -1 entonces lo busca por la rama derecha (HD)
@@ -181,24 +181,24 @@ public class ArbolBin {
     }
 
     public void vaciar() {
-        //Método público para vaciar el árbol poniendo null a la raiz
+        //MÃ©todo pÃºblico para vaciar el Ã¡rbol poniendo null a la raiz
         this.raiz = null;
     }
 
     public ArbolBin clone() {
-        //Método público para clonar el árbol
+        //MÃ©todo pÃºblico para clonar el Ã¡rbol
         ArbolBin nuevo = new ArbolBin();
-        //Llama al método clonarAux para clonar el árbol nuevo
+        //Llama al mÃ©todo clonarAux para clonar el Ã¡rbol nuevo
         nuevo.raiz = clonarAux(this.raiz);
         return nuevo;
     }
 
     private NodoArbol clonarAux(NodoArbol aux) {
-        //Método privado para clonar el árbol
+        //MÃ©todo privado para clonar el Ã¡rbol
         NodoArbol hijo = null;
         if (aux != null) {
             //El nodo hijo es creado con el elemento de aux, y enlazado con el HI y HD correspondiente
-            //Haciendo uso del mismo método
+            //Haciendo uso del mismo mÃ©todo
             hijo = new NodoArbol(aux.getElem(), clonarAux(aux.getIzquierdo()), clonarAux(aux.getDerecho()));
         }
         return hijo;
@@ -206,12 +206,35 @@ public class ArbolBin {
 
     @Override
     public String toString() {
-        //Método publico para mostrar el contenido del árbol
-        String cadena = "Árbol vacío";
-        //Llama al método privado toStringAux para trabajarlo más a fondo
+        //MÃ©todo publico para mostrar el contenido del Ã¡rbol
+        String cadena = "Ã�rbol vacÃ­o";
+        //Llama al mÃ©todo privado toStringAux para trabajarlo mÃ¡s a fondo
         cadena = toStringAux(this.raiz);
+        cadena += toStringSubArbol(raiz, "", 'r');
         return cadena;
     }
+    
+	private String toStringSubArbol(NodoArbol nodo, String prefijo, char lado) {
+		// imprime el arbol en recorrido pre-orden, agregando espacios
+		// según la profundidad
+		String rep = "";
+		
+		if(nodo != null) {
+			rep = prefijo;
+			
+			if(lado == 'd') {
+				rep += "|";
+				prefijo += " ";
+			}
+			// agregar el elemento del nodo actual
+			rep += "------" + lado + " " + nodo.getElem().toString() + "\n";
+		
+			// agregar el resto del árbol
+			rep += toStringSubArbol(nodo.getIzquierdo(), prefijo + "      |", 'i');
+			rep += toStringSubArbol(nodo.getDerecho(), prefijo + "      ", 'd');
+		}
+		return rep;
+	}
 
     private String toStringAux(NodoArbol n) {
         String cadena1 = "";
@@ -233,18 +256,18 @@ public class ArbolBin {
                 //Junto con un salto de linea
                 cadena1 = "Padre: " + n.getElem() + " HI: -  HD: -" + "\n";
             }
-            //Recorre la rama Izquierda del árbol
+            //Recorre la rama Izquierda del Ã¡rbol
             cadena1 += toStringAux(n.getIzquierdo());
-            //Recorre la rama Derecha del árbol
+            //Recorre la rama Derecha del Ã¡rbol
             cadena1 += toStringAux(n.getDerecho());
         }
         return cadena1;
     }
 
     public Lista listarPreOrden() {
-        //Método publico para listar los elementos del árbol en preorden
+        //MÃ©todo publico para listar los elementos del Ã¡rbol en preorden
         Lista listaPreOrden = new Lista();
-        //Llama al método privado preordenAux para trabajarlo
+        //Llama al mÃ©todo privado preordenAux para trabajarlo
         preordenAux(this.raiz, listaPreOrden);
         //Invierto la lista.
         listaPreOrden.invertir();
@@ -254,7 +277,7 @@ public class ArbolBin {
 
     private Lista preordenAux(NodoArbol nodo, Lista lista) {
         if (nodo != null) {
-            //Ingresa el elemento a la lista pasada por parámetro.
+            //Ingresa el elemento a la lista pasada por parÃ¡metro.
             lista.insertar(nodo.getElem(), 1);
             //Recorre sus hijos en preorden.
             preordenAux(nodo.getIzquierdo(), lista);
@@ -264,9 +287,9 @@ public class ArbolBin {
     }
 
     public Lista listarInOrden() {
-        //Método publico para listar los elementos del árbol en inorden
+        //MÃ©todo publico para listar los elementos del Ã¡rbol en inorden
         Lista listaInOrden = new Lista();
-        //Llama al método privado inordenAux para trabajarlo
+        //Llama al mÃ©todo privado inordenAux para trabajarlo
         inordenAux(this.raiz, listaInOrden);
         //Invierto la lista.
         listaInOrden.invertir();
@@ -278,18 +301,18 @@ public class ArbolBin {
         if (nodo != null) {
             //Recorre primero el HI
             inordenAux(nodo.getIzquierdo(), lista);
-            //Ingresa el elemento a la lista pasada por parámetro
+            //Ingresa el elemento a la lista pasada por parÃ¡metro
             lista.insertar(nodo.getElem(), 1);
-            //Recorre por último el HD
+            //Recorre por Ãºltimo el HD
             inordenAux(nodo.getDerecho(), lista);
         }
         return lista;
     }
 
     public Lista listarPosOrden() {
-        //Método publico para listar los elementos del árbol en posorden
+        //MÃ©todo publico para listar los elementos del Ã¡rbol en posorden
         Lista listaPosOrden = new Lista();
-        //Llama al método privado posordenAux para trabajarlo
+        //Llama al mÃ©todo privado posordenAux para trabajarlo
         posordenAux(this.raiz, listaPosOrden);
         //Invierto la lista
         listaPosOrden.invertir();
@@ -301,9 +324,9 @@ public class ArbolBin {
         if (nodo != null) {
             //Recorre primero el HI
             posordenAux(nodo.getIzquierdo(), lista);
-            //Despuúes el HD
+            //DespuÃºes el HD
             posordenAux(nodo.getDerecho(), lista);
-            //Ingresa el elemento a la lista pasada por parámetro
+            //Ingresa el elemento a la lista pasada por parÃ¡metro
             lista.insertar(nodo.getElem(), 1);
         }
         return lista;
@@ -315,7 +338,7 @@ public class ArbolBin {
 		Cola cola = new Cola();
 		Lista lista = new Lista();
 		
-		// si raiz == null no hay elementos y retorna lista vacía
+		// si raiz == null no hay elementos y retorna lista vacÃ­a
 		if(raiz != null) {
 			cola.poner(raiz);
 			
