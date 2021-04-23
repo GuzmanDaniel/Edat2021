@@ -223,4 +223,44 @@ public class Lista {
             }
         }
     }
+    
+	public Lista invertida() {
+		// retorna la inversa de esta lista
+		Nodo aux = cabecera;
+		Lista invertida = new Lista();
+		invertida.tamanio = this.tamanio;
+		while(aux != null) {
+			// agregar el siguiente elemento
+			invertida.cabecera = new Nodo(aux.getElem(), invertida.cabecera);
+			
+			// avanzar
+			aux = aux.getEnlace();
+		}
+		return invertida;
+	}
+	
+	public void invertirInPlace() {
+		// invierte esta lista
+		
+		if(cabecera != null) {
+			
+			// nueva cabecera de la lista invertida
+			Nodo nuevaCabecera = cabecera;
+			cabecera = cabecera.getEnlace();
+			nuevaCabecera.setEnlace(null);
+			
+			while(cabecera != null) {
+				
+				// sacar el siguiente elemento de la lista
+				Nodo siguiente = cabecera;
+				cabecera = cabecera.getEnlace();
+				
+				// enganchar a la lista invertida
+				siguiente.setEnlace(nuevaCabecera);
+				nuevaCabecera = siguiente;
+			}
+			cabecera = nuevaCabecera;
+		}
+	}
+
 }
