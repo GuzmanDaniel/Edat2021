@@ -34,12 +34,7 @@ public class Lista {
                 this.longitud++;
             } else {
                 //Avanza hazta el ultimo elemento en posicion pos-1.
-                Nodo aux = this.cabecera;
-                int i = 1;
-                while (i < pos - 1) {
-                    aux = aux.getEnlace();
-                    i++;
-                }
+                Nodo aux = encontrarNodo(pos - 1);
                 //Crea el nodo y lo enlaza y despues aumenta la longitud de la lista en 1.
                 Nodo nuevo = new Nodo(nuevoElem, aux.getEnlace());
                 aux.setEnlace(nuevo);
@@ -52,19 +47,17 @@ public class Lista {
     public boolean eliminar(int pos) {
         boolean exito = true;
 
+        // verificar posición válida
         if ((pos < 1) || (pos > this.longitud())) {
             exito = false;
         } else {
-            if (pos == 1) {               
+            if (pos == 1) {        
+            	// caso especial eliminar la cabecera
                 this.cabecera = this.cabecera.getEnlace();
                 this.longitud--;
             } else {
-                Nodo aux = this.cabecera;
-                int i = 1;
-                while (i < pos - 1) {
-                    aux = aux.getEnlace();
-                    i++;
-                }
+            	// caso general, encontrar el nodo a quitar y quitarlo
+                Nodo aux = encontrarNodo(pos - 1);
                 aux.setEnlace(aux.getEnlace().getEnlace());
                 this.longitud--;
             }
@@ -75,39 +68,45 @@ public class Lista {
     public Object recuperar(int pos) {
         Object elem;
         
+        // verificar posición válida
         if ((pos < 1) || (pos > this.longitud())) {
             elem = null;
         } else {
-            Nodo aux = this.cabecera;
-            int i = 1;
-            while (i != pos) {
-                aux = aux.getEnlace();
-                i++;
-            }
+        	// encontrar el elemento
+            Nodo aux = encontrarNodo(pos);
             elem = aux.getElem();
         }
         return elem;
     }
 
-    public int localizar(Object nuevoElem) {
-        int pos = -1, i = 1, aux1 = this.longitud();
-        Nodo aux = this.cabecera;
-        
-        
-        if (aux != null) {
-            while ((i < aux1) && (!nuevoElem.equals(aux.getElem()))) {
-                aux = aux.getEnlace();
-                i++;
-            }
+	private Nodo encontrarNodo(int posicion) {
+		// retorna el nodo en la posición dada
+		// precondición: el nodo se encuentra en la lista
+		Nodo aux = cabecera;
+		for(int i = 1; i < posicion; i++) {
+			aux = aux.getEnlace();
+		}
+		return aux;
+	}
+    
+	public int localizar(Object elem) {
+		Nodo aux = cabecera;
+		boolean encontrado = false;
+		int pos = 0;
+		// termina al alcanzar final de la lista o encontrar el elemento
+		while(aux != null && !encontrado) {
+			pos++;
+			// comparar con elemento actual
+			encontrado = aux.getElem().equals(elem);
+			// avanzar
+			aux = aux.getEnlace();
+		}
+		// !encontrado significa salir del while porque
+		// se recorrió toda la lista sin encontrar elem
+		if(!encontrado) pos = -1;
 
-            if (nuevoElem.equals(aux.getElem())) {
-                pos = i;
-            } else {
-                pos = -1;
-            }
-        }
-        return pos;
-    }
+		return pos;
+	}
 
     public void vaciar() {
         this.cabecera = null;
@@ -127,13 +126,18 @@ public class Lista {
         nuevaLista.longitud = this.longitud;
 
         if (!esVacia()) {
+        	// punteros auxiliares para recorrer lista y clon
             Nodo aux1 = this.cabecera;
             Nodo aux2;
+            // copiar el primer nodo y avanzar
             nuevaLista.cabecera = new Nodo(aux1.getElem(), null);
             aux2 = nuevaLista.cabecera;
             aux1 = aux1.getEnlace();
+            // copiar el resto de la lista
             while (aux1 != null) {
+            	// copiar
                 aux2.setEnlace(new Nodo(aux1.getElem(), null));
+                // avanzar
                 aux1 = aux1.getEnlace();
                 aux2 = aux2.getEnlace();
             }
@@ -214,35 +218,6 @@ public class Lista {
 		// finalmente quitar el nodo extra
 		cabecera = cabecera.getEnlace();
 	}
-    
-	/*
-
-    public void eliminarApariciones(Object x) {
-        int lon = this.longitud(), i = 1;
-        Nodo aux = this.cabecera;
-        Nodo aux1 = this.cabecera;
-        
-        while (i <= lon) {
-            if ((aux.getElem().equals(x)) && (i == 1)) {
-                aux = aux.getEnlace();
-                aux1 = aux;
-                this.cabecera = this.cabecera.getEnlace();
-            } else if (aux.getElem().equals(x)) {
-                aux = aux.getEnlace();
-                aux1.setEnlace(aux1.getEnlace().getEnlace());
-                aux1 = aux;
-            } else {
-                aux = aux.getEnlace();
-                aux1 = aux;
-            }
-            if ((aux.getElem().equals(x)) && (i == lon)) {
-                aux1.setEnlace(aux1.getEnlace());
-            }
-            i++;
-        }
-    }
-    
-   */
     
     public void invertir() {
         Nodo anterior = this.cabecera;
