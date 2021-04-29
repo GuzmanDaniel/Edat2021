@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package lineales.estaticas;
 
 /**
  *
  * @author Daniel Guzman FAI-1430 / Fabian Sepulveda FAI-2714
  */
-
 public class Cola {
 
     //Atributos:
@@ -28,7 +26,7 @@ public class Cola {
 
     public boolean poner(Object nuevoElem) {
         boolean exito = false;
-        
+
         if ((this.fin + 1) % this.TAM != this.frente) {
             //Si la cola no está llena entonces pone el nuevo elemento en la ubicacion de fin.
             //Y se corre de lugar el puntero fin.
@@ -41,7 +39,7 @@ public class Cola {
 
     public boolean sacar() {
         boolean exito = true;
-        
+
         if (this.esVacia()) {
             //La cola está vacía, reporta error.
             exito = false;
@@ -50,7 +48,7 @@ public class Cola {
             this.arreglo[this.frente] = null;
             this.frente = (this.frente + 1) % this.TAM;
         }
-        
+
         return exito;
     }
 
@@ -67,23 +65,23 @@ public class Cola {
     }
 
     public boolean esVacia() {
-        boolean exito = false;
-        
-        if (this.frente == this.fin) {
-            //Si frente y fin es igual entonces la cola está vacía.
-            exito = true;
-        }
-        return exito;
+        return (this.frente == this.fin);
     }
 
     public void vaciar() {
-        this.fin = this.frente;
+        if (!this.esVacia()) {
+            for (int i = 0; i < this.TAM; i++) {
+                this.arreglo[i] = null;
+            }
+        }
+        this.frente = 0;
+        this.fin = 0;
     }
 
     public Cola clone() {
         Cola nuevaCola = new Cola();
         int aux = this.frente;
-        
+
         while (aux != this.fin) {
             //Mientras sea distinto el frente y fin, a la nueva cola se le pone los elementos de la cola original.
             //Y aumenta la variable aux para moverse dentro del arreglo.
@@ -93,7 +91,7 @@ public class Cola {
         //Los punteros fin y frente se los asigna al final de la repetitiva.
         nuevaCola.fin = this.fin;
         nuevaCola.frente = this.frente;
-        
+
         return nuevaCola;
     }
 
@@ -101,14 +99,14 @@ public class Cola {
     public String toString() {
         String s;
         int aux = this.frente;
-        
+
         if (this.fin == this.frente) {
             //Si la cola está vacía, imprime "Cola Vacía".
             s = "Cola Vacía";
         } else {
             //Si no, imprime "[".
             s = "[";
-            
+
             while (aux != this.fin) {
                 //Mientras sea distinto el frente y fin, se le agrega el elemento a la cadena "s".
                 //Y aumenta la variable aux para moverse dentro del arreglo.
@@ -122,23 +120,22 @@ public class Cola {
             //Por último imprime "]" para cerrar la cadena "s".
             s += "]";
         }
-        
+
         return s;
     }
-    
-	public String toStringTransparente() {
-		// muestra la estructura interna de la cola
-		// en cola estática, muestra el arreglo
-		String rep = "[ ";
-		for(int i = 0; i < arreglo.length; i++) {
-			if(arreglo[i] != null) {
-				rep += arreglo[i].toString() + "  ";
-			}
-			else {
-				rep += "_  ";
-			}
-		}
-		rep += "] frente: " + frente + " fin: " + fin;
-		return rep;
-	}
+
+    public String toStringTransparente() {
+        // muestra la estructura interna de la cola
+        // en cola estática, muestra el arreglo
+        String rep = "[ ";
+        for (int i = 0; i < arreglo.length; i++) {
+            if (arreglo[i] != null) {
+                rep += arreglo[i].toString() + "  ";
+            } else {
+                rep += "_  ";
+            }
+        }
+        rep += "] frente: " + frente + " fin: " + fin;
+        return rep;
+    }
 }

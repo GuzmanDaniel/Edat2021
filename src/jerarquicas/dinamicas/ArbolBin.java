@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jerarquicas.dinamicas;
 
 import lineales.dinamicas.Lista;
@@ -13,7 +12,6 @@ import lineales.dinamicas.Cola;
  *
  * @author Daniel Guzman FAI-1430 / Fabian Sepulveda FAI-2714
  */
-
 public class ArbolBin {
 
     //Atributo
@@ -79,8 +77,8 @@ public class ArbolBin {
 
     public boolean esVacio() {
         //Devuelve true si el árbol esta vacío o false si no está vacío
-    	
-    	// si arbol vacío, raiz es null. Si no vacío, hay raíz y no es null.
+
+        // si arbol vacío, raiz es null. Si no vacío, hay raíz y no es null.
         return raiz == null;
     }
 
@@ -90,10 +88,10 @@ public class ArbolBin {
 
     private int alturaAux(NodoArbol n) {
         //Retorna la altura del subarbol definido por nodo.
-        
+
         //Caso base 1: nodo es null, salta el if.
         int altura = -1;
-        if(n != null){
+        if (n != null) {
             //Caso recursivo: sumar 1 a la mayor altura de los hijos.
             altura = Math.max(alturaAux(n.getIzquierdo()), alturaAux(n.getDerecho())) + 1;
         }
@@ -140,7 +138,7 @@ public class ArbolBin {
     private Object padreRecursivo(Object elemento, NodoArbol n) {
         Object padre = null;
         if (n != null) {
-        	// si n es padre de elemento, ya sea hijo izquierdo o derecho
+            // si n es padre de elemento, ya sea hijo izquierdo o derecho
             if ((n.getIzquierdo() != null && n.getIzquierdo().getElem().equals(elemento))
                     || (n.getDerecho() != null && n.getDerecho().getElem().equals(elemento))) {
                 padre = n.getElem();
@@ -196,28 +194,28 @@ public class ArbolBin {
         cadena += toStringSubArbol(raiz, "", 'r');
         return cadena;
     }
-    
-	private String toStringSubArbol(NodoArbol nodo, String prefijo, char lugar) {
-		// imprime el arbol en recorrido pre-orden, agregando espacios
-		// según la profundidad
-		String rep = "";
-		
-		if(nodo != null) {
-			rep = prefijo;
-			
-			if(lugar == 'D') {
-				rep += "|";
-				prefijo += " ";
-			}
-			// agregar el elemento del nodo actual
-			rep += "------" + lugar + " " + nodo.getElem().toString() + "\n";
-		
-			// agregar el resto del árbol
-			rep += toStringSubArbol(nodo.getIzquierdo(), prefijo + "      |", 'I');
-			rep += toStringSubArbol(nodo.getDerecho(), prefijo + "      ", 'D');
-		}
-		return rep;
-	}
+
+    private String toStringSubArbol(NodoArbol nodo, String prefijo, char lugar) {
+        // imprime el arbol en recorrido pre-orden, agregando espacios
+        // según la profundidad
+        String rep = "";
+
+        if (nodo != null) {
+            rep = prefijo;
+
+            if (lugar == 'D') {
+                rep += "|";
+                prefijo += " ";
+            }
+            // agregar el elemento del nodo actual
+            rep += "------" + lugar + " " + nodo.getElem().toString() + "\n";
+
+            // agregar el resto del árbol
+            rep += toStringSubArbol(nodo.getIzquierdo(), prefijo + "      |", 'I');
+            rep += toStringSubArbol(nodo.getDerecho(), prefijo + "      ", 'D');
+        }
+        return rep;
+    }
 
     private String toStringAux(NodoArbol n) {
         String cadena1 = "";
@@ -247,18 +245,16 @@ public class ArbolBin {
         return cadena1;
     }
 
-	// en los métodos de recorridos se usa insertar(elem, 1) en listas
-	// porque es de O(1) dada la implementación de lista con cabecera y
+    // en los métodos de recorridos se usa insertar(elem, 1) en listas
+    // porque es de O(1) dada la implementación de lista con cabecera y
     // por lo tanto más eficiente que insertar() general que es de O(n).
-	// esta forma de insertar tiene el inconveniente de que el orden de la lista
-	// es invertido, por lo que antes de retornar la lista debe ser invertida.
-	// En total cada elemento es visitado 2 veces, la primera al recorrer el 
-	// árbol y la segunda al invertir la lista, siendo los métodos de O(2n) = O(n)
-	
-	// Si en cambio se inserta por el final, por la regla del producto, 
-	// tenemos O(n) por recorrer cada elemento y O(n) del insertar general 
-	// para cada elemento, dando O(n * n) = O(n^2)
-    
+    // esta forma de insertar tiene el inconveniente de que el orden de la lista
+    // es invertido, por lo que antes de retornar la lista debe ser invertida.
+    // En total cada elemento es visitado 2 veces, la primera al recorrer el 
+    // árbol y la segunda al invertir la lista, siendo los métodos de O(2n) = O(n)
+    // Si en cambio se inserta por el final, por la regla del producto, 
+    // tenemos O(n) por recorrer cada elemento y O(n) del insertar general 
+    // para cada elemento, dando O(n * n) = O(n^2)
     public Lista listarPreorden() {
         //Método público para listar los elementos del árbol en preorden
         Lista listaPreOrden = new Lista();
@@ -266,7 +262,7 @@ public class ArbolBin {
         preordenAux(this.raiz, listaPreOrden);
         //Invierto la lista.
         listaPreOrden.invertir();
-        
+
         return listaPreOrden;
     }
 
@@ -288,7 +284,7 @@ public class ArbolBin {
         inordenAux(this.raiz, listaInOrden);
         //Invierto la lista.
         listaInOrden.invertir();
-        
+
         return listaInOrden;
     }
 
@@ -311,7 +307,7 @@ public class ArbolBin {
         posordenAux(this.raiz, listaPosOrden);
         //Invierto la lista
         listaPosOrden.invertir();
-        
+
         return listaPosOrden;
     }
 
@@ -328,33 +324,37 @@ public class ArbolBin {
     }
 
     public Lista listarPorNiveles() {
-		// retorna una lista con los elemetos ordenados en recorrido por nivel
-		
-		Cola cola = new Cola();
-		Lista lista = new Lista();
-		
-		// si raiz == null no hay elementos y retorna lista vacía
-		if(raiz != null) {
-			cola.poner(raiz);
-			
-			while(!cola.esVacia()) {
-				
-				// visitar siguiente nodo
-				NodoArbol nodo = (NodoArbol) cola.obtenerFrente();
-				cola.sacar();
-				lista.insertar(nodo.getElem(), 1);
-				
-				// poner a los hijos del nodo en la cola
-				NodoArbol izquierdo = nodo.getIzquierdo();
-				NodoArbol derecho = nodo.getDerecho();
-				if(izquierdo != null) cola.poner(izquierdo);
-				if(derecho != null) cola.poner(derecho);
-			}
-		}
-		
-		lista.invertir();
-		return lista;
-	}
+        // retorna una lista con los elemetos ordenados en recorrido por nivel
+
+        Cola cola = new Cola();
+        Lista lista = new Lista();
+
+        // si raiz == null no hay elementos y retorna lista vacía
+        if (raiz != null) {
+            cola.poner(raiz);
+
+            while (!cola.esVacia()) {
+
+                // visitar siguiente nodo
+                NodoArbol nodo = (NodoArbol) cola.obtenerFrente();
+                cola.sacar();
+                lista.insertar(nodo.getElem(), 1);
+
+                // poner a los hijos del nodo en la cola
+                NodoArbol izquierdo = nodo.getIzquierdo();
+                NodoArbol derecho = nodo.getDerecho();
+                if (izquierdo != null) {
+                    cola.poner(izquierdo);
+                }
+                if (derecho != null) {
+                    cola.poner(derecho);
+                }
+            }
+        }
+
+        lista.invertir();
+        return lista;
+    }
 
     public Lista obtenerAncestros(Object elemento) {
         Lista lista = new Lista();
@@ -380,34 +380,47 @@ public class ArbolBin {
         return encontrado;
     }
 
-	public Lista frontera() {
-		// retorna una lista con los nodos hoja del arbol
-		
-		Lista lista = new Lista();
-		
-		listarHojas(raiz, lista);
-		lista.invertirInPlace();
-		
-		return lista;
-	}
-	
-	private void listarHojas(NodoArbol nodo, Lista lista) {
-		// agrega los nodos hoja del arbol en nodo a la lista
-		
-		// caso base 1: nodo es null
-		
-		if(nodo != null) {
-			NodoArbol izquierdo = nodo.getIzquierdo();
-			NodoArbol derecho = nodo.getDerecho();
-			
-			// caso base 2: nodo hoja encontrado!!!
-			if(izquierdo == null && derecho == null) {
-				lista.insertar(nodo.getElem(), 1);
-			}
-			else {
-				listarHojas(izquierdo, lista);
-				listarHojas(derecho, lista);
-			}
-		}
-	}
+    public Lista frontera() {
+        // retorna una lista con los nodos hoja del arbol
+
+        Lista lista = new Lista();
+
+        listarHojas(raiz, lista);
+        lista.invertirInPlace();
+
+        return lista;
+    }
+
+    private void listarHojas(NodoArbol nodo, Lista lista) {
+        // agrega los nodos hoja del arbol en nodo a la lista
+
+        // caso base 1: nodo es null
+        if (nodo != null) {
+            NodoArbol izquierdo = nodo.getIzquierdo();
+            NodoArbol derecho = nodo.getDerecho();
+
+            // caso base 2: nodo hoja encontrado!!!
+            if (izquierdo == null && derecho == null) {
+                lista.insertar(nodo.getElem(), 1);
+            } else {
+                listarHojas(izquierdo, lista);
+                listarHojas(derecho, lista);
+            }
+        }
+    }
+    
+    //Ejercicio de Simulacro
+    public ArbolBin clonarInvertido() {
+        ArbolBin arbol = new ArbolBin();
+        arbol.raiz = clonarInvertidoAux(this.raiz);
+        return arbol;
+    }
+
+    private NodoArbol clonarInvertidoAux(NodoArbol n) {
+        NodoArbol hijo = null;
+        if (n != null) {           
+            hijo = new NodoArbol(n.getElem(), clonarInvertidoAux(n.getDerecho()), clonarInvertidoAux(n.getIzquierdo()));
+        }
+        return hijo;
+    }
 }

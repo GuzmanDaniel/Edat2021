@@ -114,11 +114,7 @@ public class Lista {
     }
 
     public boolean esVacia() {
-        boolean vacia = false;
-        if (this.cabecera == null) {
-            vacia = true;
-        }
-        return vacia;
+        return (this.cabecera == null);
     }
     
     public Lista clone() {
