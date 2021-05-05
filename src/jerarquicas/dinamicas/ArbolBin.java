@@ -422,5 +422,5 @@ public class ArbolBin {
             hijo = new NodoArbol(n.getElem(), clonarInvertidoAux(n.getDerecho()), clonarInvertidoAux(n.getIzquierdo()));
         }
         return hijo;
-    }
+    }    
 }

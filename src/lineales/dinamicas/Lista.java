@@ -9,7 +9,6 @@ package lineales.dinamicas;
  *
  * @author Daniel Guzman FAI-1430 / Fabian Sepulveda FAI-2714
  */
-
 public class Lista {
 
     private Nodo cabecera;
@@ -51,12 +50,12 @@ public class Lista {
         if ((pos < 1) || (pos > this.longitud())) {
             exito = false;
         } else {
-            if (pos == 1) {        
-            	// caso especial eliminar la cabecera
+            if (pos == 1) {
+                // caso especial eliminar la cabecera
                 this.cabecera = this.cabecera.getEnlace();
                 this.longitud--;
             } else {
-            	// caso general, encontrar el nodo a quitar y quitarlo
+                // caso general, encontrar el nodo a quitar y quitarlo
                 Nodo aux = encontrarNodo(pos - 1);
                 aux.setEnlace(aux.getEnlace().getEnlace());
                 this.longitud--;
@@ -67,46 +66,48 @@ public class Lista {
 
     public Object recuperar(int pos) {
         Object elem;
-        
+
         // verificar posición válida
         if ((pos < 1) || (pos > this.longitud())) {
             elem = null;
         } else {
-        	// encontrar el elemento
+            // encontrar el elemento
             Nodo aux = encontrarNodo(pos);
             elem = aux.getElem();
         }
         return elem;
     }
 
-	private Nodo encontrarNodo(int posicion) {
-		// retorna el nodo en la posición dada
-		// precondición: el nodo se encuentra en la lista
-		Nodo aux = cabecera;
-		for(int i = 1; i < posicion; i++) {
-			aux = aux.getEnlace();
-		}
-		return aux;
-	}
-    
-	public int localizar(Object elem) {
-		Nodo aux = cabecera;
-		boolean encontrado = false;
-		int pos = 0;
-		// termina al alcanzar final de la lista o encontrar el elemento
-		while(aux != null && !encontrado) {
-			pos++;
-			// comparar con elemento actual
-			encontrado = aux.getElem().equals(elem);
-			// avanzar
-			aux = aux.getEnlace();
-		}
-		// !encontrado significa salir del while porque
-		// se recorrió toda la lista sin encontrar elem
-		if(!encontrado) pos = -1;
+    private Nodo encontrarNodo(int posicion) {
+        // retorna el nodo en la posición dada
+        // precondición: el nodo se encuentra en la lista
+        Nodo aux = cabecera;
+        for (int i = 1; i < posicion; i++) {
+            aux = aux.getEnlace();
+        }
+        return aux;
+    }
 
-		return pos;
-	}
+    public int localizar(Object elem) {
+        Nodo aux = cabecera;
+        boolean encontrado = false;
+        int pos = 0;
+        // termina al alcanzar final de la lista o encontrar el elemento
+        while (aux != null && !encontrado) {
+            pos++;
+            // comparar con elemento actual
+            encontrado = aux.getElem().equals(elem);
+            // avanzar
+            aux = aux.getEnlace();
+        }
+        // !encontrado significa salir del while porque
+        // se recorrió toda la lista sin encontrar elem
+        if (!encontrado) {
+            pos = -1;
+        }
+
+        return pos;
+    }
 
     public void vaciar() {
         this.cabecera = null;
@@ -116,13 +117,13 @@ public class Lista {
     public boolean esVacia() {
         return (this.cabecera == null);
     }
-    
+
     public Lista clone() {
         Lista nuevaLista = new Lista();
         nuevaLista.longitud = this.longitud;
 
         if (!esVacia()) {
-        	// punteros auxiliares para recorrer lista y clon
+            // punteros auxiliares para recorrer lista y clon
             Nodo aux1 = this.cabecera;
             Nodo aux2;
             // copiar el primer nodo y avanzar
@@ -131,7 +132,7 @@ public class Lista {
             aux1 = aux1.getEnlace();
             // copiar el resto de la lista
             while (aux1 != null) {
-            	// copiar
+                // copiar
                 aux2.setEnlace(new Nodo(aux1.getElem(), null));
                 // avanzar
                 aux1 = aux1.getEnlace();
@@ -191,30 +192,29 @@ public class Lista {
         return nuevaLista;
     }
 
-	public void eliminarApariciones(Object elem) {
-		// elimina todas las apariciones de elem en la lista
-		
-		// agregar un nodo extra elimina casos especiales como
-		// eliminar varios elementos al inicio de la lista
-		cabecera = new Nodo(null, cabecera);
-		
-		Nodo aux = cabecera;
-		Nodo visitado;
-		while(aux != null && (visitado = aux.getEnlace()) != null) {
-			if(visitado.getElem().equals(elem)) {
-				// saltar el nodo para quitarlo de la lista
-				aux.setEnlace(visitado.getEnlace());
-				longitud--;
-			}
-			else {
-				aux = aux.getEnlace();
-			}
-		}
-		
-		// finalmente quitar el nodo extra
-		cabecera = cabecera.getEnlace();
-	}
-    
+    public void eliminarApariciones(Object elem) {
+        // elimina todas las apariciones de elem en la lista
+
+        // agregar un nodo extra elimina casos especiales como
+        // eliminar varios elementos al inicio de la lista
+        cabecera = new Nodo(null, cabecera);
+
+        Nodo aux = cabecera;
+        Nodo visitado;
+        while (aux != null && (visitado = aux.getEnlace()) != null) {
+            if (visitado.getElem().equals(elem)) {
+                // saltar el nodo para quitarlo de la lista
+                aux.setEnlace(visitado.getEnlace());
+                longitud--;
+            } else {
+                aux = aux.getEnlace();
+            }
+        }
+
+        // finalmente quitar el nodo extra
+        cabecera = cabecera.getEnlace();
+    }
+
     public void invertir() {
         Nodo anterior = this.cabecera;
         invertirAux(this.cabecera);
@@ -232,44 +232,44 @@ public class Lista {
             }
         }
     }
-    
-	public Lista invertida() {
-		// retorna la inversa de esta lista
-		Nodo aux = cabecera;
-		Lista invertida = new Lista();
-		invertida.longitud = this.longitud;
-		while(aux != null) {
-			// agregar el siguiente elemento
-			invertida.cabecera = new Nodo(aux.getElem(), invertida.cabecera);
-			
-			// avanzar
-			aux = aux.getEnlace();
-		}
-		return invertida;
-	}
-	
-	public void invertirInPlace() {
-		// invierte esta lista
-		
-		if(cabecera != null) {
-			
-			// nueva cabecera de la lista invertida
-			Nodo nuevaCabecera = cabecera;
-			cabecera = cabecera.getEnlace();
-			nuevaCabecera.setEnlace(null);
-			
-			while(cabecera != null) {
-				
-				// sacar el siguiente elemento de la lista
-				Nodo siguiente = cabecera;
-				cabecera = cabecera.getEnlace();
-				
-				// enganchar a la lista invertida
-				siguiente.setEnlace(nuevaCabecera);
-				nuevaCabecera = siguiente;
-			}
-			cabecera = nuevaCabecera;
-		}
-	}
+
+    public Lista invertida() {
+        // retorna la inversa de esta lista
+        Nodo aux = cabecera;
+        Lista invertida = new Lista();
+        invertida.longitud = this.longitud;
+        while (aux != null) {
+            // agregar el siguiente elemento
+            invertida.cabecera = new Nodo(aux.getElem(), invertida.cabecera);
+
+            // avanzar
+            aux = aux.getEnlace();
+        }
+        return invertida;
+    }
+
+    public void invertirInPlace() {
+        // invierte esta lista
+
+        if (cabecera != null) {
+
+            // nueva cabecera de la lista invertida
+            Nodo nuevaCabecera = cabecera;
+            cabecera = cabecera.getEnlace();
+            nuevaCabecera.setEnlace(null);
+
+            while (cabecera != null) {
+
+                // sacar el siguiente elemento de la lista
+                Nodo siguiente = cabecera;
+                cabecera = cabecera.getEnlace();
+
+                // enganchar a la lista invertida
+                siguiente.setEnlace(nuevaCabecera);
+                nuevaCabecera = siguiente;
+            }
+            cabecera = nuevaCabecera;
+        }
+    }
 
 }
